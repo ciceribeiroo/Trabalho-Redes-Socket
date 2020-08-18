@@ -3,7 +3,7 @@ Implementação de uma batalha naval utilizando sockets em python
 
 Incluindo implementações básicas feitas para o estudo
 
-#### A implementação principal está na página batalhaNaval
+## A implementação principal está na página batalhaNaval
 Para rodar o jogo, o servidor deve ser rodado primeiro: py servidor-jogador1.py
 Após isso, em outro cmd, o cliente deve ser rodado: py cliente-jogador2.py
 
@@ -13,7 +13,7 @@ Após isso, cada jogador irá definir a posição de seus navios na malha 10x10 
   - 3 contra torpedos de tamanho 3
   - 4 submarinos de tamanho 2
   
-Erro!: define um navio corretamente e encerra o programa
+#### Erro -> define um navio corretamente e encerra o programa
 
 A ideia principal do jogo é que cada jogador tem dois tabuleiros, um seu e um do seu oponente. No seu ele ve as posições atuais dos navios e do oponente ele ve vazio. Na malha os simbolos representam:
   - '-' escondido

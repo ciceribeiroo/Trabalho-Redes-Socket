@@ -68,11 +68,13 @@ while True:
 				else:
 					msg = socket_tcp.recv(1024)
 					jogada = msg.decode()
+					linha = jogada[0]
+					coluna = jogada[1]
 					if(msg == 'X'): 
-						tabuleirooponente[jogada[0]][jogada[1]] = msg
+						tabuleirooponente[int(linha)][int(coluna)] = msg
 						antingidos = antingidos + 1
 					else:
-						tabuleirooponente[jogada[0]][jogada[1]] = msg
+						tabuleirooponente[int(linha)][int(coluna)] = msg
 						quemJoga == '2'
 
 

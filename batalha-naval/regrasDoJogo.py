@@ -28,7 +28,7 @@ def colocarNavios(tabuleiro):
         s = s + 1
 
 def colocarNavio(nome, tamanho, tabuleiro, quantidade):
-    posicao= input("Insira a posição do navio (linhaxcoluna) "+ nome + " " + str(quantidade)+": ")
+    posicao= input("Insira a posição do navio (linhaxcolunaxposicao) "+ nome + " " + str(quantidade)+": ")
     comSucesso = validaColocarNavio(tabuleiro, posicao, tamanho)
     while not comSucesso:
         posicao= input("Insira a posição do navio(LC): ")
@@ -44,15 +44,21 @@ def colocarNavio(nome, tamanho, tabuleiro, quantidade):
 
 def definirNavios(tabuleiro, linha, coluna, direcao, tamanho):
     if direcao == 'h':
-        while tamanho > 0:
-            tabuleiro[linha][coluna] = 'O'
-            tamanho = tamanho - 1
-            coluna = coluna + 1
+        if(tamanho+coluna > 10): 
+            print("Navio não cabe na malha.Tente novamente")
+        else:
+            while tamanho > 0:
+                tabuleiro[linha][coluna] = 'O'
+                tamanho = tamanho - 1
+                coluna = coluna + 1
     else:
-        while tamanho > 0:
-            tabuleiro[linha][coluna] = 'O'
-            tamanho = tamanho - 1
-            linha = linha + 1
+        if(tamanho+linha > 10): 
+            print("Navio não cabe na malha.Tente novamente")
+        else:
+            while tamanho > 0:
+                tabuleiro[linha][coluna] = 'O'
+                tamanho = tamanho - 1
+                linha = linha + 1
 
 def imprimeRegras(jogador):    
     print("##------------------------------------------------------------##")
@@ -64,8 +70,7 @@ def imprimeRegras(jogador):
 
 def imprimeTabuleiros(tabuleiro1, tabuleiro2):
     
-    print("         Defenda |o|                                         Ataque |o|")
-    print(" ")
+    print("              Defenda |o|                                      Ataque |o|")
     print("  0   1   2   3   4   5   6   7   8   9            0   1   2   3   4   5   6   7   8   9")
     print("  ______________________________________             ______________________________________")
     print("0| %c | %c | %c | %c | %c | %c | %c | %c | %c | %c           0| %c | %c | %c | %c | %c | %c | %c | %c | %c | %c " 
@@ -107,7 +112,7 @@ def imprimeTabuleiros(tabuleiro1, tabuleiro2):
     print("9| %c | %c | %c | %c | %c | %c | %c | %c | %c | %c           9| %c | %c | %c | %c | %c | %c | %c | %c | %c | %c" 
             % ( tabuleiro1[9][0], tabuleiro1[9][1], tabuleiro1[9][2], tabuleiro1[9][3], tabuleiro1[9][4], tabuleiro1[9][5], tabuleiro1[9][6], tabuleiro1[9][7], tabuleiro1[9][8],tabuleiro1[9][9],
             tabuleiro2[9][0], tabuleiro2[9][1], tabuleiro2[9][2], tabuleiro2[9][3], tabuleiro2[9][4], tabuleiro2[9][5], tabuleiro2[9][6], tabuleiro2[9][7], tabuleiro2[9][8],tabuleiro2[9][9]) )
-    print("  ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻            ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻")
+    print("  ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻            ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻")
     return
 
 def criaTabuleiro():
@@ -126,7 +131,7 @@ def validaColocarNavio(tabuleiro, jogada, tamanho) :
     if tabuleiro[int(jogada[0])][int(jogada[1])] != '-':
         print("\tEssa jogada já foi feita. Tente novamente") 
         return False
-    if int(jogada[0])+tamanho >10 or int(jogada[1])+tamanho >10:
+    if int(jogada[0]) >10 or int(jogada[1]) >10:
         print("\tO navio não cabe no tabuleiro. Tente novamente") 
         return False
     return True
@@ -143,14 +148,16 @@ def validaJogada(tabuleiro, jogada) :
     return True
 
 def fimDeJogo(acertos):
-    if (acertos == 32):
+    if (acertos == 30):
         return 1    
     return 0
 
 def executarTiro(tabuleiro, posicao):
-    if tabuleiro[int(posicao[0])][int(tabuleiro[1])] == 'O':
-        tabuleiro[posicao[0]][posicao[1]] == 'X'
+    linha = posicao[0]
+    coluna = posicao[1]
+    if tabuleiro[int(linha)][int(coluna)] == 'O':
+        tabuleiro[int(linha)][int(coluna)] == 'X'
         return True
     else:
-        tabuleiro[int(posicao[0])][int(posicao[1])] == '.'
+        tabuleiro[int(linha)][int(coluna)] == '.'
         return False

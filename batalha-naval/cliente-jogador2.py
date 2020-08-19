@@ -10,6 +10,7 @@ tabuleiroproprio = []
 tabuleirooponente = []
 antingidos = 0
 jogador = '2'
+quemJoga = '2'
 
 socket_tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket_tcp.connect((Host, Port))
@@ -18,12 +19,10 @@ tabuleiroproprio = criaTabuleiro()
 tabuleirooponente = criaTabuleiro()
 imprimeRegras(jogador)
 colocarNavios(tabuleiroproprio)
-imprimirTabuleiros(tabuleiroproprio, tabuleirooponente)
+imprimeTabuleiros(tabuleiroproprio, tabuleirooponente)
 
 print ('Preparar, apontar....')
 while em_jogo:
-	quemJoga = socket_tcp.recv(1024)
-	quemJoga = quemJoga.decode()
 #------------------------------------------------------------------------------------------------------------------------#
 	while(quemJoga == '2'):
 		jogada = input("Jogada: ")
@@ -46,6 +45,7 @@ while em_jogo:
 				tabuleirooponente[jogada[0]][jogada[1]] = msg
 				quemJoga == '1'
 
+		imprimeTabuleiros(tabuleiroproprio, tabuleirooponente)
 		fim = fimDeJogo(antingidos)
 		if fim > 0:
 			print("\nVocê Ganhou! Parabéns! :D")
@@ -71,6 +71,7 @@ while em_jogo:
 					mensagem = '.'
 					socket_tcp.send(mensagem.encode()) 
 		
+				imprimeTabuleiros(tabuleiroproprio, tabuleirooponente)
 				fim = fimDeJogo(antingidos)
 				if fim > 0:
 					if fim == 1: 

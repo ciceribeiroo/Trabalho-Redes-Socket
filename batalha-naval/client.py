@@ -102,7 +102,7 @@ def client():
             
                     imprimeTabuleiros(tabuleiroproprio, tabuleirooponente)
 
-    client_socket.close()  # close the connection
+    client_socket.close()  # fecha a conexao
 
 
 if __name__ == '__main__':

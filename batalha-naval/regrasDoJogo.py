@@ -1,12 +1,6 @@
 from os import system
 import random
 
-def quemComeca():
-    r = random.randint(1,2)
-    if(r == 1):
-        return '1'
-    return '2'
-
 def colocarNavios(tabuleiro):
     print("Defina seus navios no tabuleiro")
 
@@ -146,11 +140,6 @@ def validaJogada(tabuleiro, jogada) :
         print("\tEssa jogada já foi feita. Tente novamente") 
         return False
     return True
-
-def fimDeJogo(acertos):
-    if (acertos == 30):
-        return 1    
-    return 0
 
 def executarTiro(tabuleiro, posicao):
     linha = posicao[0]
